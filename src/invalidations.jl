@@ -20,7 +20,7 @@ function recompile_invalidations(__module__::Module, @nospecialize expr)
         ccall(:jl_debug_method_invalidation, Any, (Cint,), 0)
     end
     if ccall(:jl_generating_output, Cint, ()) == 1
-        @info "list: $(lenght(list)) $list"
+        @info "list: $(length(list)) $list"
         foreach(precompile_mi, invalidation_leaves(list))
     end
     nothing

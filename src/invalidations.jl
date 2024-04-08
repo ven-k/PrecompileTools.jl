@@ -39,13 +39,7 @@ function invalidation_leaves(invlist)
 
     i, ilast = firstindex(invlist), lastindex(invlist)
     while i <= ilast
-        
-        item = try
-            invlist[i]
-        catch e
-            @info e
-            @info "The undefref: " invlist[i]
-        end
+        isdefined(invlist, i)) ? item = invlist[i] : continue
         if isa(item, Core.MethodInstance)
             if i < lastindex(invlist)
                 nextitem = invlist[i+1]

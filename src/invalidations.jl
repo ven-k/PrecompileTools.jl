@@ -38,7 +38,9 @@ function invalidation_leaves(invlist)
     end
 
     i, ilast = firstindex(invlist), lastindex(invlist)
+    @info "" i ilast "invlist: $invlist"
     while i <= ilast
+        @info "Inside while: " i ilast length(invlist)
         item = invlist[i]
         if isa(item, Core.MethodInstance)
             if i < lastindex(invlist)

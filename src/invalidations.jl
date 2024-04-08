@@ -38,10 +38,14 @@ function invalidation_leaves(invlist)
     end
 
     i, ilast = firstindex(invlist), lastindex(invlist)
-    @info "" i ilast "invlist: $invlist"
     while i <= ilast
-        @info "Inside while: " i ilast length(invlist)
-        item = invlist[i]
+        
+        item = try
+            invlist[i]
+        catch e
+            @info e
+            @info "The undefref: " invlist[i]
+        end
         if isa(item, Core.MethodInstance)
             if i < lastindex(invlist)
                 nextitem = invlist[i+1]

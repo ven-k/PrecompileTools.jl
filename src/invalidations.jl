@@ -39,7 +39,7 @@ function invalidation_leaves(invlist)
 
     i, ilast = firstindex(invlist), lastindex(invlist)
     while i <= ilast
-        isdefined(invlist, i)) ? item = invlist[i] : continue
+        isdefined(invlist, i) ? item = invlist[i] : continue
         if isa(item, Core.MethodInstance)
             if i < lastindex(invlist)
                 nextitem = invlist[i+1]

@@ -39,7 +39,13 @@ function invalidation_leaves(invlist)
 
     i, ilast = firstindex(invlist), lastindex(invlist)
     while i <= ilast
-        isdefined(invlist, i) ? item = invlist[i] : continue
+        if isdefined(invlist, i)
+            item = invlist[i]
+        else
+            @info "$i loc was undefined"
+            i += 1
+            continue
+        end
         if isa(item, Core.MethodInstance)
             if i < lastindex(invlist)
                 nextitem = invlist[i+1]
